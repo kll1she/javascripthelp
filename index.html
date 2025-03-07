@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Help</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .toggle-button {
+            cursor: pointer;
+            color: #000;
+            text-decoration: underline;
+        }
+        .section-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Шпаргалка по JavaScript</h1>
+            <!-- <nav>
+                <a href="#data-types">Примитивные и ссылочные типы данных</a>
+                <a href="#var">var, let, const</a>
+                <a href="#typing-and-compilation">Различия JS и TS</a>
+                <a href="#functions">Обычные и стрелочные функции</a>
+            </nav> -->
+        </header>
+
+        <!-- DATA TYPES -->
+        <section id="data-types">
+            <h2>
+                Примитивные и ссылочные типы данных
+                <span class="toggle-button" onclick="toggleSection('data-types')">[Показать]</span>
+            </h2>
+            <div class="section-content">
+                <p>Давайте подробно рассмотрим примитивные и ссылочные типы данных в JavaScript и TypeScript, их различия и особенности.</p>
+
+                <h3>Примитивные типы данных</h3>
+                <p>Примитивные типы данных — это базовые типы, которые представляют простые значения.</p>
+
+                <h4>Number</h4>
+                <p><strong>Описание:</strong> Используется для представления как целых, так и дробных чисел.</p>
+                <pre><code>let age = 25;
+        let price = 19.99;</code></pre>
+
+                <h4>String</h4>
+                <p><strong>Описание:</strong> Используется для представления текстовых данных.</p>
+                <pre><code>let name = "Alice";
+        let greeting = 'Hello, World!';</code></pre>
+
+                <h4>Boolean</h4>
+                <p><strong>Описание:</strong> Используется для представления логических значений: <code>true</code> или <code>false</code>.</p>
+                <pre><code>let isActive = true;
+        let isCompleted = false;</code></pre>
+
+                <h4>Undefined</h4>
+                <p><strong>Описание:</strong> Переменная, которая была объявлена, но не инициализирована, имеет значение <code>undefined</code>.</p>
+                <pre><code>let uninitialized;
+        console.log(uninitialized); // undefined</code></pre>
+
+                <h4>Null</h4>
+                <p><strong>Описание:</strong> Представляет отсутствие значения.</p>
+                <pre><code>let empty = null;</code></pre>
+
+                <h4>Symbol</h4>
+                <p><strong>Описание:</strong> Используется для создания уникальных идентификаторов.</p>
+                <pre><code>const sym = Symbol('sym');</code></pre>
+
+                <h4>BigInt</h4>
+                <p><strong>Описание:</strong> Используется для представления целых чисел произвольной точности.</p>
+                <pre><code>let bigNumber = 123456789012345678901234567890n;</code></pre>
+
+                <p><strong>Особенности примитивных типов:</strong></p>
+                <ul>
+                    <li><strong>Неизменяемость:</strong> Примитивные значения неизменяемы.</li>
+                    <li><strong>Копирование по значению:</strong> При присвоении примитивного значения переменной создается копия этого значения.</li>
+                    <li><strong>Сравнение по значению:</strong> При сравнении примитивных значений сравниваются их фактические значения.</li>
+                </ul>
+
+                <pre><code>let a = 10;
+        let b = a;
+        b = 20;
+        console.log(a); // 10
+        console.log(b); // 20
+
+        let str1 = "Hello";
+        let str2 = str1;
+        str2 = "Hi";
+        console.log(str1); // "Hello"
+        console.log(str2); // "Hi"</code></pre>
+
+                <h3>Ссылочные типы данных</h3>
+                <p>Ссылочные типы данных — это более сложные структуры, которые представляют собой объекты.</p>
+
+                <h4>Object</h4>
+                <p><strong>Описание:</strong> Используется для хранения коллекций данных и более сложных сущностей.</p>
+                <pre><code>let person = {
+          name: "Alice",
+          age: 30
+        };</code></pre>
+
+                <h4>Array</h4>
+                <p><strong>Описание:</strong> Специальный тип объекта для хранения упорядоченных коллекций элементов.</p>
+                <pre><code>let numbers = [1, 2, 3, 4, 5];</code></pre>
+
+                <h4>Function</h4>
+                <p><strong>Описание:</strong> Функции в JavaScript также являются объектами.</p>
+                <pre><code>function greet() {
+          console.log("Hello!");
+        }</code></pre>
+
+                <h4>Date, RegExp, Map, Set и другие</h4>
+                <p><strong>Описание:</strong> Существует множество других встроенных объектов, которые также являются ссылочными типами.</p>
+
+                <p><strong>Особенности ссылочных типов:</strong></p>
+                <ul>
+                    <li><strong>Изменяемость:</strong> Объекты и массивы являются изменяемыми.</li>
+                    <li><strong>Копирование по ссылке:</strong> При присвоении объекта или массива переменной копируется ссылка на объект, а не сам объект.</li>
+                    <li><strong>Сравнение по ссылке:</strong> При сравнении объектов сравниваются ссылки, а не их содержимое.</li>
+                </ul>
+
+                <pre><code>let obj1 = { name: "Alice" };
+        let obj2 = obj1;
+        obj2.name = "Bob";
+        console.log(obj1.name); // "Bob"
+        console.log(obj2.name); // "Bob"
+
+        let arr1 = [1, 2, 3];
+        let arr2 = arr1;
+        arr2.push(4);
+        console.log(arr1); // [1, 2, 3, 4]
+        console.log(arr2); // [1, 2, 3, 4]</code></pre>
+
+                <h3>Копирование и сравнение</h3>
+
+                <h4>Копирование</h4>
+                <ul>
+                    <li><strong>Примитивные типы:</strong> При копировании примитивного значения создается новая копия этого значения.</li>
+                    <li><strong>Ссылочные типы:</strong> При копировании ссылочного типа копируется ссылка на объект, а не сам объект.</li>
+                </ul>
+
+                <pre><code>let a = 5;
+        let b = a; // b получает копию значения 5
+        b = 10;
+        console.log(a); // 5
+        console.log(b); // 10
+
+        let obj1 = { value: 10 };
+        let obj2 = obj1; // obj2 ссылается на тот же объект, что и obj1
+        obj2.value = 20;
+        console.log(obj1.value); // 20
+        console.log(obj2.value); // 20</code></pre>
+
+                <h4>Сравнение</h4>
+                <ul>
+                    <li><strong>Примитивные типы:</strong> Сравниваются значения.</li>
+                    <li><strong>Ссылочные типы:</strong> Сравниваются ссылки.</li>
+                </ul>
+
+                <pre><code>let a = "Hello";
+        let b = "Hello";
+        console.log(a === b); // true
+
+        let obj1 = { name: "Alice" };
+        let obj2 = { name: "Alice" };
+        console.log(obj1 === obj2); // false
+
+        let obj3 = obj1;
+        console.log(obj1 === obj3); // true</code></pre>
+            </div>
+        </section>
+
+        <!-- VAR, LET, CONST -->
+        <section id="var">
+            <h2>
+                var, let, const
+                <span class="toggle-button" onclick="toggleSection('var')">[Показать]</span>
+            </h2>
+            <div class="section-content">
+                <h2>var</h2>
+                <p>`var` используется для объявления переменных с функциональной областью видимости. Переменные, объявленные с помощью `var`, могут быть переопределены и имеют подъем (hoisting).</p>
+                <pre><code>var x = 10;
+        if (true) {
+            var x = 20; // тот же самый x
+            console.log(x); // 20
+        }
+        console.log(x); // 20</code></pre>
+                <h2>let</h2>
+                <p>`let` используется для объявления переменных с блочной областью видимости. Переменные, объявленные с помощью `let`, могут быть переопределены, но не имеют подъем.</p>
+                <pre><code>let y = 10;
+        if (true) {
+            let y = 20; // другой y
+            console.log(y); // 20
+        }
+        console.log(y); // 10</code></pre>
+                <h2>const</h2>
+                <p>`const` используется для объявления констант с блочной областью видимости. Константы не могут быть переопределены после их объявления.</p>
+                <pre><code>const z = 10;
+        if (true) {
+            const z = 20; // другой z
+            console.log(z); // 20
+        }
+        console.log(z); // 10</code></pre>
+            </div>
+        </section>
+
+        <!-- JS/TS -->
+        <section id="typing-and-compilation">
+            <h2>
+                Различия JS и TS
+                <span class="toggle-button" onclick="toggleSection('typing-and-compilation')">[Показать]</span>
+            </h2>
+            <div class="section-content">
+                <h3>Типизация</h3>
+
+                <h4>JavaScript (Динамическая типизация)</h4>
+                <p>В JavaScript тип переменной определяется во время выполнения программы. Это позволяет присваивать переменной значения разных типов без ошибок до выполнения кода.</p>
+                <pre><code>let message = "Привет, мир!"; // message имеет тип string
+        message = 42; // теперь message имеет тип number
+        console.log(message); // выведет 42</code></pre>
+
+                <h4>TypeScript (Статическая типизация)</h4>
+                <p>В TypeScript вы можете явно указать тип переменной, что позволяет компилятору проверять типы на этапе компиляции и обнаруживать ошибки до выполнения кода.</p>
+                <pre><code>let message: string = "Привет, мир!";
+        message = 42; // Ошибка компиляции: Type 'number' is not assignable to type 'string'.</code></pre>
+
+                <h3>Компиляция</h3>
+
+                <h4>JavaScript</h4>
+                <p>JavaScript — это интерпретируемый язык. Код выполняется непосредственно в среде выполнения, такой как браузер или Node.js, без предварительной компиляции.</p>
+                <pre><code>// Просто сохраните файл с расширением .js и откройте его в браузере
+        console.log("JavaScript работает!");</code></pre>
+
+                <h4>TypeScript</h4>
+                <p>TypeScript должен быть скомпилирован в JavaScript перед выполнением. Это делается с помощью компилятора TypeScript (tsc).</p>
+                <pre><code>// Сохраните файл с расширением .ts
+        let message: string = "TypeScript работает!";
+        console.log(message);</code></pre>
+                <p>Чтобы скомпилировать этот код, выполните команду:</p>
+                <pre><code>tsc filename.ts</code></pre>
+                <p>Это создаст файл <code>filename.js</code>, который можно выполнить в среде выполнения JavaScript.</p>
+
+                <h3>Поддержка новых возможностей</h3>
+
+                <h4>JavaScript</h4>
+                <p>Новые возможности JavaScript добавляются в стандарт ECMAScript. Поддержка этих возможностей зависит от браузеров и сред выполнения.</p>
+                <pre><code>// Использование стрелочных функций (ES6+)
+        const greet = (name) => {
+          console.log(`Привет, ${name}!`);
+        };
+        greet("Алиса");</code></pre>
+
+                <h4>TypeScript</h4>
+                <p>TypeScript поддерживает многие новые возможности JavaScript и добавляет свои собственные, такие как декораторы.</p>
+                <pre><code>// Использование декораторов (TypeScript)
+        function decorator(target: Function) {
+          console.log("Декоратор работает!");
+        }
+
+        @decorator
+        class MyClass {
+          // ...
+        }</code></pre>
+
+                <h3>Инструменты и поддержка</h3>
+
+                <h4>JavaScript</h4>
+                <p>JavaScript имеет широкую поддержку в инструментах разработки, таких как редакторы кода (VSCode, Sublime Text, Atom) и отладчики.</p>
+                <pre><code>// Пример отладки в браузере
+        function add(a, b) {
+          return a + b;
+        }
+
+        console.log(add(2, 3)); // 5</code></pre>
+
+                <h4>TypeScript</h4>
+                <p>TypeScript предоставляет более богатую поддержку инструментов, включая более точную подсветку синтаксиса, автодополнение и проверку типов в реальном времени.</p>
+                <pre><code>// Пример автодополнения в редакторе
+        interface Person {
+          name: string;
+          age: number;
+        }
+
+        let person: Person = {
+          name: "Боб",
+          age: 30
+        };
+
+        person. // Редактор предложит свойства name и age</code></pre>
+
+                <h3>Интерфейсы и перечисления</h3>
+
+                <h4>Интерфейсы</h4>
+                <p>Интерфейсы в TypeScript используются для определения контрактов в вашем коде. Они определяют набор свойств и методов, которые класс или объект должны реализовать.</p>
+                <pre><code>// Пример интерфейса
+        interface Animal {
+          name: string;
+          speak(): void;
+        }
+
+        class Dog implements Animal {
+          name: string;
+          constructor(name: string) {
+            this.name = name;
+          }
+          speak() {
+            console.log("Гав!");
+          }
+        }
+
+        let myDog = new Dog("Рекс");
+        myDog.speak(); // Гав!</code></pre>
+
+                <h4>Перечисления (Enums)</h4>
+                <p>Перечисления позволяют определить набор именованных констант. Это полезно, когда у вас есть набор связанных значений.</p>
+                <pre><code>// Пример перечисления
+        enum Color {
+          Red,
+          Green,
+          Blue
+        }
+
+        let favoriteColor: Color = Color.Green;
+        console.log(favoriteColor); // 1</code></pre>
+
+                <h3>Декораторы</h3>
+                <p>Декораторы — это специальные функции, которые позволяют изменять или расширять поведение классов, методов, свойств и параметров в TypeScript.</p>
+                <pre><code>// Пример простого декоратора
+        function Logger(target: Function) {
+          console.log(`Класс ${target.name} был создан.`);
+        }
+
+        @Logger
+        class Person {
+          constructor(public name: string) {}
+        }
+
+        const person = new Person("Алиса"); // Вывод: Класс Person был создан.</code></pre>
+
+                <h4>Декоратор метода</h4>
+                <pre><code>function LogMethod(target: any, propertyName: string, descriptor: PropertyDescriptor) {
+          const originalMethod = descriptor.value;
+
+          descriptor.value = function(...args: any[]) {
+            console.log(`Метод ${propertyName} вызван с аргументами: ${args}`);
+            return originalMethod.apply(this, args);
+          };
+
+          return descriptor;
+        }
+
+        class Calculator {
+          @LogMethod
+          add(a: number, b: number): number {
+            return a + b;
+          }
+        }
+
+        const calc = new Calculator();
+        calc.add(2, 3);
+        // Вывод: Метод add вызван с аргументами: 2,3
+        // Возвращает: 5</code></pre>
+            </div>
+        </section>
+
+        <!-- FUNCTIONS -->
+        <section id="functions">
+            <h2>
+                Обычные и стрелочные функции
+                <span class="toggle-button" onclick="toggleSection('functions')">[Показать]</span>
+            </h2>
+            <div class="section-content">
+                <h3>Обычные функции</h3>
+                <h4>Синтаксис:</h4>
+                <pre><code>// Объявление функции
+        function greet(name) {
+          return `Привет, ${name}!`;
+        }
+        
+        // Вызов функции
+        console.log(greet("Алиса")); // Привет, Алиса!</code></pre>
+        
+                <h4>Особенности:</h4>
+                <ol>
+                    <li>
+                        <strong>Контекст выполнения (this):</strong>
+                        <p>Обычные функции имеют собственный контекст <code>this</code>, который определяется во время вызова функции. Значение <code>this</code> внутри обычной функции зависит от того, как функция была вызвана.</p>
+                    </li>
+                    <li>
+                        <strong>Конструкторы:</strong>
+                        <p>Обычные функции могут использоваться как конструкторы с использованием ключевого слова <code>new</code>.</p>
+                    </li>
+                    <li>
+                        <strong>Поднятие (Hoisting):</strong>
+                        <p>Объявления обычных функций поднимаются вверх своей области видимости, что означает, что их можно вызывать до того, как они были объявлены.</p>
+                    </li>
+                </ol>
+        
+                <h4>Примеры:</h4>
+                <pre><code>// Контекст `this` в обычной функции
+        const obj = {
+          value: 10,
+          showValue: function() {
+            console.log(this.value);
+          }
+        };
+        
+        obj.showValue(); // 10
+        
+        const show = obj.showValue;
+        show(); // undefined (или ошибка в строгом режиме)</code></pre>
+        
+                <h3>Стрелочные функции</h3>
+                <h4>Синтаксис:</h4>
+                <pre><code>// Стрелочная функция с одним параметром
+        const greet = (name) => `Привет, ${name}!`;
+        
+        // Вызов функции
+        console.log(greet("Алиса")); // Привет, Алиса!</code></pre>
+        
+                <h4>Особенности:</h4>
+                <ol>
+                    <li>
+                        <strong>Контекст выполнения (this):</strong>
+                        <p>Стрелочные функции не имеют собственного контекста <code>this</code>. Они наследуют <code>this</code> от родительской области видимости. Это делает их особенно полезными в колбэках и методах, где вы хотите сохранить контекст родительской функции.</p>
+                    </li>
+                    <li>
+                        <strong>Конструкторы:</strong>
+                        <p>Стрелочные функции не могут быть использованы как конструкторы с <code>new</code>.</p>
+                    </li>
+                    <li>
+                        <strong>Поднятие:</strong>
+                        <p>Стрелочные функции не поднимаются, их нужно объявлять до использования.</p>
+                    </li>
+                    <li>
+                        <strong>Короткий синтаксис:</strong>
+                        <p>Если тело функции состоит из одного выражения, можно опустить фигурные скобки и ключевое слово <code>return</code>.</p>
+                    </li>
+                </ol>
+        
+                <h4>Примеры:</h4>
+                <pre><code>// Контекст `this` в стрелочной функции
+        const obj = {
+          value: 10,
+          showValue: function() {
+            const inner = () => {
+              console.log(this.value);
+            };
+            inner();
+          }
+        };
+        
+        obj.showValue(); // 10
+        
+        const show = obj.showValue;
+        show(); // 10</code></pre>
+        
+                <h3>Сравнение и преимущества</h3>
+                <ol>
+                    <li>
+                        <strong>Контекст this:</strong>
+                        <p><strong>Обычные функции:</strong> Имеют собственный контекст <code>this</code>, который может изменяться в зависимости от способа вызова.</p>
+                        <p><strong>Стрелочные функции:</strong> Не имеют собственного <code>this</code>, они наследуют его от родительской области видимости. Это устраняет многие проблемы с контекстом, особенно в колбэках.</p>
+                        <pre><code>const obj = {
+          value: 10,
+          regularFunction: function() {
+            console.log(this.value);
+          },
+          arrowFunction: () => {
+            console.log(this.value);
+          }
+        };
+        
+        obj.regularFunction(); // 10
+        obj.arrowFunction();   // undefined (или ошибка в строгом режиме)</code></pre>
+                    </li>
+                    <li>
+                        <strong>Синтаксис:</strong>
+                        <p><strong>Обычные функции:</strong> Более многословный синтаксис, но более гибкий.</p>
+                        <p><strong>Стрелочные функции:</strong> Более краткий синтаксис, что делает код более чистым и читаемым, особенно для небольших функций.</p>
+                    </li>
+                    <li>
+                        <strong>Поднятие:</strong>
+                        <p><strong>Обычные функции:</strong> Поднимаются, что позволяет вызывать их до объявления.</p>
+                        <p><strong>Стрелочные функции:</strong> Не поднимаются, их нужно объявлять до использования.</p>
+                    </li>
+                    <li>
+                        <strong>Использование в качестве конструкторов:</strong>
+                        <p><strong>Обычные функции:</strong> Могут использоваться как конструкторы.</p>
+                        <p><strong>Стрелочные функции:</strong> Не могут быть использованы как конструкторы.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+        <section id="scopes">
+            <h2>
+                Области видимости в JavaScript
+                <span class="toggle-button" onclick="toggleSection('scopes')">[Показать]</span>
+            </h2>
+            <div class="section-content">
+                <h3>Что такое область видимости?</h3>
+                <p>Область видимости определяет доступность переменных, функций и объектов в той части кода, где они определены. В JavaScript существует несколько типов областей видимости:</p>
+        
+                <h4>Глобальная область видимости</h4>
+                <p>Переменные и функции, объявленные в глобальной области видимости, доступны из любого места в коде. Они существуют на протяжении всего времени выполнения программы.</p>
+                <pre><code>// Глобальная переменная
+        var globalVar = "Я глобальная";
+        
+        function showGlobal() {
+          console.log(globalVar);
+        }
+        
+        showGlobal(); // Я глобальная</code></pre>
+        
+                <h4>Локальная (функциональная) область видимости</h4>
+                <p>Переменные, объявленные внутри функции, доступны только внутри этой функции. Они создаются при вызове функции и уничтожаются после завершения её выполнения.</p>
+                <pre><code>function showLocal() {
+          var localVar = "Я локальная";
+          console.log(localVar);
+        }
+        
+        showLocal(); // Я локальная
+        console.log(localVar); // Ошибка: localVar is not defined</code></pre>
+        
+                <h4>Блочная область видимости (ES6+)</h4>
+                <p>Переменные, объявленные с помощью <code>let</code> и <code>const</code>, имеют блочную область видимости, то есть они доступны только внутри блока, в котором они были объявлены (например, внутри фигурных скобок <code>{}</code>).</p>
+                <pre><code>if (true) {
+          let blockVar = "Я блочная";
+          const constantVar = "Я постоянная";
+          console.log(blockVar);       // Я блочная
+          console.log(constantVar);    // Я постоянная
+        }
+        
+        console.log(blockVar);       // Ошибка: blockVar is not defined
+        console.log(constantVar);    // Ошибка: constantVar is not defined</code></pre>
+        
+                <h4>Область видимости функции</h4>
+                <p>Каждая функция создает свою собственную область видимости, и переменные, объявленные внутри функции, не доступны снаружи.</p>
+                <pre><code>function outer() {
+          var outerVar = "Я внешняя";
+        
+          function inner() {
+            var innerVar = "Я внутренняя";
+            console.log(outerVar); // Доступно
+          }
+        
+          inner();
+          console.log(innerVar); // Ошибка: innerVar is not defined
+        }
+        
+        outer();</code></pre>
+            </div>
+        </section>              
+    </div>
+    <button class="back-to-top" onclick="scrollToTop()">Наверх</button>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const content = section.querySelector('.section-content');
+            const button = section.querySelector('.toggle-button');
+
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                button.textContent = '[Скрыть]';
+            } else {
+                content.style.display = 'none';
+                button.textContent = '[Показать]';
+            }
+        }
+    </script>
+</body>
+</html>
